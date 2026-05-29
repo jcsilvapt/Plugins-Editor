@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96ef2076f3b4e1e4ba3fd7140f1dedc3, type: 3}
+  m_Name: Settings
+  m_EditorClassIdentifier: 
+  resolution: 0
+  displayMode: 0
+  quality: 0
+  masterVolume: 80
+  musicVolume: 100
+  sfxVolume: 100
+  walkFoward: 119
+  walkBackwards: 115
+  walkLeft: 97
+  walkRight: 100
+  crouch: 0
+  jump: 0
+  sprint: 0
+  droneActivation: 0
+  droneMoveUp: 0
+  droneMoveDown: 0
+  interaction: 0
+  escape: 0
+  mouseSensitivity: 1
+  invertMouse: 0

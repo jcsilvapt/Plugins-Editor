@@ -36,10 +36,10 @@ namespace jcsilva.CharacterController {
             currentSpeed = Input.GetKey(KeyCode.LeftShift) ? runningSpeed : movementSpeed;
 
             if (movement != Vector3.zero) {
-                Vector3 velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
-                rb.velocity = velocity * currentSpeed;
+                Vector3 velocity = new Vector3(movement.x, rb.linearVelocity.y, movement.z);
+                rb.linearVelocity = velocity * currentSpeed;
             } else {
-                rb.velocity = new Vector3(0f, rb.velocity.y, 0f);
+                rb.linearVelocity = new Vector3(0f, rb.linearVelocity.y, 0f);
             }
         }
 
