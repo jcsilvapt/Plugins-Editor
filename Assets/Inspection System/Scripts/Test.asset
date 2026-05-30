@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a195a302ec17994ba3e91756fd826c5, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: Assembly-CSharp::jcsilva.InspectionSystem.InspectableData
-  objectName: 
-  description: 
-  hasClue: 0
-  clueText: 
+  objectName: Photo
+  description: Here's something
+  hasClue: 1
+  clueText: the stuff
