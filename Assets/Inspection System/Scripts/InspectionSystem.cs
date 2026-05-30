@@ -15,7 +15,6 @@ namespace jcsilva.InspectionSystem {
 
         [Header("Travel")]
         [SerializeField] [Range(1f, 20f)] private float travelSpeed = 8f;
-        [SerializeField] private KeyCode inspectKey = KeyCode.E;
 
         [Header("Rotation")]
         [SerializeField] private float rotationSensitivity = 120f;
@@ -26,18 +25,17 @@ namespace jcsilva.InspectionSystem {
 
         private InspectableObject currentObject;
         private Vector3 targetPosition;
-        private Quaternion targetRotation;
 
         // ── Unity lifecycle ────────────────────────────────────────
         private void Update() {
             switch (currentState) {
-                case State.Idle:      TickIdle();      break;
-                case State.Traveling: TickTraveling(); break;
-                case State.Inspecting:                 break;
-                case State.Returning: TickReturning(); break;
+                case State.Idle:       TickIdle();      break;
+                case State.Traveling:  TickTraveling(); break;
+                case State.Inspecting:                  break;
+                case State.Returning:  TickReturning(); break;
             }
 
-            if (currentState == State.Inspecting && Input.GetKeyDown(inspectKey)) {
+            if (currentState == State.Inspecting && InputManager.Instance.GetInteractInput()) {
                 Cancel();
             }
         }
@@ -49,7 +47,7 @@ namespace jcsilva.InspectionSystem {
             if (hit != null) {
                 ui.ShowPrompt(hit.Data.ObjectName);
 
-                if (Input.GetKeyDown(inspectKey)) {
+                if (InputManager.Instance.GetInteractInput()) {
                     BeginInspection(hit);
                 }
             } else {
@@ -64,7 +62,6 @@ namespace jcsilva.InspectionSystem {
                 Time.deltaTime * travelSpeed
             );
 
-            // Switch to Inspecting once close enough
             if (Vector3.Distance(currentObject.transform.position, targetPosition) < 0.01f) {
                 currentObject.transform.position = targetPosition;
                 currentState = State.Inspecting;
@@ -92,6 +89,8 @@ namespace jcsilva.InspectionSystem {
                 currentObject.transform.rotation = storedRot;
                 currentObject = null;
                 currentState = State.Idle;
+                InputManager.Instance.LockMovementInput(false);
+                InputManager.Instance.LockMouseInput(false);
             }
         }
 
@@ -123,6 +122,8 @@ namespace jcsilva.InspectionSystem {
 
             currentState = State.Traveling;
             ui.HidePrompt();
+            InputManager.Instance.LockMovementInput(true);
+            InputManager.Instance.LockMouseInput(true);
         }
 
         private void Cancel() {

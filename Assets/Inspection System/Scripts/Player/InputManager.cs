@@ -27,6 +27,18 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    // ── Lock controls ──────────────────────────────────────────────
+
+    public void LockMovementInput(bool locked) {
+        lockMovementInput = locked;
+    }
+
+    public void LockMouseInput(bool locked) {
+        lockMouseInput = locked;
+    }
+
+    // ── Inputs ─────────────────────────────────────────────────────
+
     public Vector2 GetMovementInput()
     {
         if (lockMovementInput) return Vector2.zero;
@@ -45,5 +57,14 @@ public class InputManager : MonoBehaviour
         float y = Input.GetAxisRaw("Mouse Y") * -1f;
 
         return new Vector2(x, y);
+    }
+
+    /// <summary>
+    /// Returns true the frame the interact key is pressed.
+    /// Defined here so any system can listen without owning a KeyCode.
+    /// </summary>
+    public bool GetInteractInput()
+    {
+        return Input.GetKeyDown(KeyCode.E);
     }
 }
